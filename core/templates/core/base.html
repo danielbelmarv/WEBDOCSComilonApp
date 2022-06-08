@@ -20,14 +20,13 @@
             <p>comilonapp</p>
         </div>
         <ul>
-            <li> <a href="#" class="active">HOME</a> </li>
-            <li> <a href="#">INICIAR SESION</a> </li>
-            <li> <a href="#">REGISTRO</a> </li>
-            <li> <a href="#">PEDIDO</a> </li>
+            <li> <a href="{% url 'home' %}" class="active">HOME</a> </li>
+            <li> <a href="{% url 'login' %}">INICIAR SESION</a> </li>
+            <li> <a href="{% url 'registro' %}">REGISTRO</a> </li>
+            <li> <a href="{% url 'pedido' %}">HAZ UN PEDIDO</a> </li>
         </ul>
     </nav>
     </header>
-
     <body>
 
     {% block contenido %}
