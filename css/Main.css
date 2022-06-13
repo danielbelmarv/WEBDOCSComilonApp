@@ -142,7 +142,7 @@ h3{
 
 /*Letras introductorias*/
 h3{
-    color:black;
+    color:rgb(3, 55, 9);
     text-align: center;
 }
 
@@ -187,9 +187,9 @@ h3{
 }
 
 .formulario__validacion-estado{
-    position: absolute;
-    right: 1010px;
-    bottom: 20px;
+    position: relative;
+    right: 100px;
+    bottom: 0px;
     z-index: 100;
     font-size: 27px;
     opacity: 0
