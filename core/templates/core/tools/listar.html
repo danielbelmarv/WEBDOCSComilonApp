@@ -1,0 +1,74 @@
+{% extends 'core/base.html' %}
+
+{% block js %}
+<!-- Script de SweetAlert que pregunta por la confirmación y eliminación de un producto -->
+<script>
+    function eliminarProducto(id){
+        Swal.fire({
+            'title': '¿Estás seguro?',
+            'text': 'Esta opción no puede deshacerse',
+            'icon': 'question',
+            'showCancelButton': true,
+            'cancelButtonText': 'Cancelar',
+            'confirmButtonText': 'Sí, eliminar',
+            'confirmButtonColor': '#dc3545'
+        })
+        .then(function(result) {
+            if(result.isConfirmed){
+                window.location.href = '/eliminar-plato/'+id+'/'
+            }
+        })
+    }
+</script>
+{% endblock %}
+
+{% block contenido %}
+{% load humanize %}
+<br><br>
+<div class="center">
+    <div class="card">
+        <div class="card-body">
+            <h2>Listado de productos existentes</h2>
+            <hr>
+            <table class="table table-striped table-hover table-responsive-sm">
+                <tr>
+                    <th>Nombre</th>
+                    <th>Precio</th>
+                    <th>Detalle</th>
+                    <th>Fecha agregado</th>
+                    <th>Proveedor</th>
+                    <th>Opciones</th>
+                </tr>
+            
+                {% for p in entity %}
+            
+                <tr>
+                    <td>{{ p.nombre | title }}</td>
+                    <td>${{ p.precio | intcomma }}</td>
+                    <td>{{ p.descripcion | title }}</td>
+                    <td>{{ p.fecha_agregado }}</td>
+                    <td>{{ p.proveedor | title }}</td>
+                    <td>
+                        {% if perms.core.change_plato %}
+                        <a href="{% url 'modificar_plato' p.id %}" class="btn btn-primary btn-sm">Modificar</a>
+                        {% endif %}
+                        <!-- No preocuparse por el error de abajo.-->
+                        <!-- Visual Studio no reconoce la sintáxis combinada de Django y JavaScript, pero funciona-->
+                        {% if perms.core.delete_plato %}
+                        <a href="#" onclick="eliminarProducto({{ p.id }})" class="btn btn-danger btn-sm">Eliminar</a>
+                        {% endif %}
+                    </td>
+                </tr>
+            
+                {% endfor %}
+            
+            </table>
+            <hr>
+            <div>
+                {% include 'core/paginator.html' %}
+            </div>
+        </div>
+    </div>
+</div>
+<br><br>
+{% endblock %}
