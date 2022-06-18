@@ -23,7 +23,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">HOME</a>
+                <a class="nav-link active" aria-current="page" href="{% url 'home' %}">HOME</a>
             </li>
             <li class="nav-item">
                 <a href="#" class="nav-link">HAZ UN PEDIDO</a>
@@ -32,14 +32,22 @@
                 <a href="#" class="nav-link">CATÁLOGO</a>
             </li>
             </ul>
+            {% if user.is_authenticated %}
             <ul class="navbar-nav mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a href="" class="nav-link">INICIA SESIÓN</a>
-                </li>
-                <li class="nav-item">
-                    <a href="" class="nav-link">REGÍSTRATE</a>
+                    <a href="{% url 'logout' %}" class="nav-link">CERRAR SESIÓN</a>
                 </li>
             </ul>
+            {% else %}
+            <ul class="navbar-nav mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a href="{% url 'login' %}" class="nav-link">INICIA SESIÓN</a>
+                </li>
+                <li class="nav-item">
+                    <a href="{% url 'registro' %}" class="nav-link">REGÍSTRATE</a>
+                </li>
+            </ul>
+            {% endif %}
         </div>
         </div>
     </nav>

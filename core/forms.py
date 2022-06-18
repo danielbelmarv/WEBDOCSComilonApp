@@ -1,5 +1,6 @@
 from django import forms
-
+from datetime import date
+from django.core.validators import MaxValueValidator
 from core.validators import MaxSizeFileValidator
 from .models import Plato
 from django.contrib.auth.forms import UserCreationForm
@@ -11,7 +12,7 @@ class PlatoForm(forms.ModelForm):
     nombre = forms.CharField(min_length=8, max_length=35)
     precio = forms.IntegerField(min_value=1000, max_value=500000)
     descripcion = forms.CharField(min_length=20, max_length=100)
-    fecha_agregado = forms.DateField()
+    fecha_agregado = forms.DateField(validators=[MaxValueValidator(limit_value=date.today)])
     miniatura = forms.ImageField(required=False, validators=[MaxSizeFileValidator(max_file_size=2)])
 
     def clean_nombre(self):
@@ -33,7 +34,7 @@ class PlatoForm(forms.ModelForm):
         }
 
 class CustomUserCreationForm(UserCreationForm):
-
+    
     class Meta:
         model = User
         fields = [
