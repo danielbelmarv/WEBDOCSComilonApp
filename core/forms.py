@@ -9,7 +9,7 @@ from django.forms import ValidationError
 
 class PlatoForm(forms.ModelForm):
 
-    nombre = forms.CharField(min_length=8, max_length=35)
+    nombre = forms.CharField(min_length=5, max_length=35)
     precio = forms.IntegerField(min_value=1000, max_value=500000)
     descripcion = forms.CharField(min_length=20, max_length=100)
     fecha_agregado = forms.DateField(validators=[MaxValueValidator(limit_value=date.today)])
@@ -28,10 +28,6 @@ class PlatoForm(forms.ModelForm):
 
         model = Plato
         fields = '__all__'
-
-        widgets = {
-            'fecha_agregado': forms.SelectDateWidget()
-        }
 
 class CustomUserCreationForm(UserCreationForm):
     

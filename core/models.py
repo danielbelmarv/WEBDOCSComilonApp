@@ -12,7 +12,7 @@ class Plato(models.Model):
     precio = models.IntegerField()
     descripcion = models.CharField(max_length=100)
     esNuevo = models.BooleanField()
-    proovedor = models.ForeignKey(Proveedor, on_delete=models.PROTECT)
+    proveedor = models.ForeignKey(Proveedor, on_delete=models.PROTECT)
     fecha_agregado = models.DateField()
     miniatura = models.ImageField()
 
