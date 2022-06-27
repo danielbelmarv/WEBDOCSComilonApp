@@ -53,6 +53,8 @@
                     {% if perms.core.change_plato %}
                     <a href="{% url 'modificar_plato' p.id %}" class="btn btn-primary btn-sm">Modificar</a>
                     {% endif %}
+                    <!-- no preocuparse por el error de abajo. -->
+                    <!-- Visual Studio no reconoce la sintáxis combinada de Django y JavaScript, pero funciona -->
                     {% if perms.core.delete_producto %}
                     <a href="#" onclick="eliminarPlato({{ p.id }})" class="btn btn-danger btn-sm">Eliminar</a>
                     {% endif %}
