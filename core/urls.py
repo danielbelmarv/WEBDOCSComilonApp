@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import index, listarPlatos, modificarPlato, pedido, login, registro, agregarPlato
+from .views import eliminarPlato, index, listarPlatos, modificarPlato, pedido, login, registro, agregarPlato
 
 #Solo en debug
 from django.conf import settings
@@ -14,6 +14,7 @@ urlpatterns = [
     path('agregar-plato/', agregarPlato, name='agregar_plato'),
     path('listar-platos/', listarPlatos, name='listar_platos'),
     path('modificar-plato/<id>/', modificarPlato, name='modificar_plato'),
+    path('eliminar-plato/<id>/', eliminarPlato, name='eliminar_plato'),
 ]
 
 if settings.DEBUG:

@@ -1,5 +1,28 @@
 {% extends 'core/base.html' %}
 
+{% block js %}
+
+<script>
+    function eliminarPlato(id){
+        Swal.fire({
+            'title': '¿Estás seguro?',
+            'text': 'Esta acción no se puede deshacer',
+            'icon': 'question',
+            'showCancelButton': true,
+            'cancelButtonText': 'No, cancelar',
+            'confirmButtonText': 'Sí, eliminar',
+            'confirmButtonColor': '#dc3545'
+        })
+        .then(function(result){
+            if(result.isConfirmed){
+                window.location.href = '/eliminar-plato/' + id + '/'
+            }
+        })
+    }
+</script>
+
+{% endblock %}
+
 {% block contenido %}
 {% load humanize %}
 
@@ -27,11 +50,11 @@
                 <td>{{ p.proveedor }}</td>
                 <td>{{ p.fecha_agregado }}</td>
                 <td>
-                    {% if perms.core.delete_plato %}
-                    <a href="#" class="btn btn-primary btn-sm">Modificar</a>
+                    {% if perms.core.change_plato %}
+                    <a href="{% url 'modificar_plato' p.id %}" class="btn btn-primary btn-sm">Modificar</a>
                     {% endif %}
                     {% if perms.core.delete_producto %}
-                    <a href="#" class="btn btn-danger btn-sm">Eliminar</a>
+                    <a href="#" onclick="eliminarPlato({{ p.id }})" class="btn btn-danger btn-sm">Eliminar</a>
                     {% endif %}
                 </td>
             </tr>
