@@ -1,0 +1,32 @@
+{% extends 'core/base.html' %}
+{% load humanize %}
+{% load static %}
+
+{% block contenido %}
+<br>
+<div class="container">
+  {% for p in entity %}   
+    <div class="card-group mt-3">
+      <div class="card text-center border-info">
+
+          <div class="card-body">
+            <h4 class="card-title">{{ p.nombre | capfirst }}</h4>
+            {% if p.miniatura  %}
+              <img src="{{ p.miniatura.url }}" alt="Imágen de plato" width="165px">
+            {% else %}
+              <img src="https://placehold.jp/30/dd6699/ffffff/200x200.png?text=placeholder+image" alt="Imágen de plato">
+            {% endif %}
+            <p class="card text">${{ p.precio | intcomma }}</p>
+            <a href="#" class="btn btn-primary">Añadir a carro</a>
+          </div>
+        
+        </div>
+    </div>
+    {% endfor %}
+</div>
+<br>
+<div>
+  {% include 'core/paginator.html' %}
+</div>
+<br><br> 
+{% endblock %}

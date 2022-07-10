@@ -1,14 +1,10 @@
 from django.urls import path
-from .views import eliminarPlato, index, listarPlatos, modificarPlato, pedido, login, registro, agregarPlato
-
-#Solo en debug
-from django.conf import settings
-from django.conf.urls.static import static
-#
+from .views import eliminarPlato, index, listarPlatos, modificarPlato, pedido, login, registro, agregarPlato, platos
 
 urlpatterns = [
     path('', index, name='home'),
     path('pedido/', pedido, name='pedido'),
+    path('catalogo/', platos, name='catalogo'),
     path('login/', login, name='login'),
     path('registro/', registro, name='registro'),
     path('agregar-plato/', agregarPlato, name='agregar_plato'),
@@ -16,6 +12,3 @@ urlpatterns = [
     path('modificar-plato/<id>/', modificarPlato, name='modificar_plato'),
     path('eliminar-plato/<id>/', eliminarPlato, name='eliminar_plato'),
 ]
-
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

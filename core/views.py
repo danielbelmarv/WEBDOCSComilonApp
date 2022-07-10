@@ -6,7 +6,7 @@ from core.models import Plato
 from django.contrib.auth import authenticate, login as dj_login
 from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib import messages
-
+from django.core.paginator import Paginator
 
 # Create your views here.
 def index(request):
@@ -34,6 +34,21 @@ def registro(request):
         data['form'] = formulario
 
     return render(request, 'registration/registro.html', data)
+
+def platos(request):
+    platos = Plato.objects.all()
+    page = request.GET.get('page', 1)
+
+    try:
+        paginator = Paginator(platos, 5)
+        platos = paginator.page(page)
+    except:
+        raise Http404
+    data = {
+        'entity': platos,
+        'paginator': paginator
+    }
+    return render(request, 'core/platos.html', data)
 
 @permission_required('core.add_plato')
 def agregarPlato(request):

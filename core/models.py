@@ -14,7 +14,7 @@ class Plato(models.Model):
     esNuevo = models.BooleanField()
     proveedor = models.ForeignKey(Proveedor, on_delete=models.PROTECT)
     fecha_agregado = models.DateField()
-    miniatura = models.ImageField()
+    miniatura = models.ImageField(upload_to='platos', null=True)
 
     def __str__(self):
         return self.nombre
