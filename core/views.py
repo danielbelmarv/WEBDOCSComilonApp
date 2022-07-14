@@ -12,9 +12,6 @@ from django.core.paginator import Paginator
 def index(request):
     return render(request, 'core/index.html')
 
-def pedido(request):
-    return render(request, 'core/pedido.html')
-
 def login(request):
     return render(request, 'core/login.html')
 
@@ -100,3 +97,11 @@ def eliminarPlato(request, id):
     plato.delete()
     messages.success(request, 'Eliminado correctamente')
     return redirect(to='listar_platos')
+
+def cart(request):
+    data = {}
+    return render(request, 'core/cart.html', data)
+
+def checkout(request):
+    data = {}
+    return render(request, 'core/checkout.html', data)
