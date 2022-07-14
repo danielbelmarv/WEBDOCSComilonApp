@@ -1,4 +1,21 @@
 {% extends 'core/base.html' %}
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/jquery-ui.min.css' %}">
+<link rel="stylesheet" href="{% static 'css/jquery-ui.structure.min.css' %}">
+<link rel="stylesheet" href="{% static 'css/jquery-ui.theme.min.css' %}">
+{% endblock %}
+
+{% block js %}
+<script src="{% static '/js/jquery-3.6.0.min.js' %}"></script>
+<script src="{% static '/js/jquery-ui.min.js' %}"></script>
+<script>
+    $(document).ready(function(){
+        $('.dateinput').datepicker()
+    });
+</script>
+{% endblock %}
 
 {% block contenido %}
 {% load crispy_forms_tags%}

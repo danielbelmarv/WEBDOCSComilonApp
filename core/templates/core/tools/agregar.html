@@ -1,15 +1,32 @@
 {% extends 'core/base.html' %}
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/jquery-ui.min.css' %}">
+<link rel="stylesheet" href="{% static 'css/jquery-ui.structure.min.css' %}">
+<link rel="stylesheet" href="{% static 'css/jquery-ui.theme.min.css' %}">
+{% endblock %}
+
+{% block js %}
+<script src="{% static '/js/jquery-3.6.0.min.js' %}"></script>
+<script src="{% static '/js/jquery-ui.min.js' %}"></script>
+<script>
+    $(document).ready(function(){
+        $('.dateinput').datepicker()
+    });
+</script>
+{% endblock %}
 
 {% block contenido %}
 {% load crispy_forms_tags%}
 
 <br><br>
-        <div class="row">
-            <div class="col-12 col-md-6 offset-md-3">
-                <div class="card">
-                    <div class="card-body">
-                        <h2>Agrega un nuevo producto</h2>
-                        <hr>
+    <div class="row">
+        <div class="col-12 col-md-6 offset-md-3">
+            <div class="card">
+                <div class="card-body">
+                    <h2>Agrega un nuevo producto</h2>
+                    <hr>
                     <form action="" method="post" enctype="multipart/form-data">
 
                         {% csrf_token %}
@@ -21,14 +38,13 @@
                             &nbsp;
                             <input type="reset" value="Cancelar" class="btn btn-secondary">    
                         </div>
-                        
+                            
                     </form>
                     {{mensaje}}
-            </div>
-        </div> 
-
+                </div>
+            </div> 
+        </div>
     </div>
-</div>
 <br><br>
 
 {% endblock %}

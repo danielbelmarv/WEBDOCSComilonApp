@@ -6,6 +6,7 @@ from .models import Plato
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.forms import ValidationError
+from bootstrap_datepicker_plus.widgets import DatePickerInput
 
 class PlatoForm(forms.ModelForm):
 
@@ -28,6 +29,9 @@ class PlatoForm(forms.ModelForm):
 
         model = Plato
         fields = '__all__'
+        widgets = {
+            'fecha_agregado': DatePickerInput()
+        }
 
 class CustomUserCreationForm(UserCreationForm):
     

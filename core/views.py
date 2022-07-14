@@ -2,11 +2,12 @@ from math import perm
 from django.http import Http404 
 from django.shortcuts import render, redirect, get_object_or_404
 from core.forms import CustomUserCreationForm, PlatoForm
-from core.models import Plato
+from core.models import *
 from django.contrib.auth import authenticate, login as dj_login
 from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib import messages
 from django.core.paginator import Paginator
+from django.db.models import Q
 
 # Create your views here.
 def index(request):
@@ -34,8 +35,13 @@ def registro(request):
 
 def platos(request):
     platos = Plato.objects.all()
-    page = request.GET.get('page', 1)
+    buscaPlato = request.GET.get('search')
+    if buscaPlato:
+        platos = Plato.objects.filter(Q(nombre__icontains=buscaPlato))
+    else:
+        platos
 
+    page = request.GET.get('page', 1)
     try:
         paginator = Paginator(platos, 5)
         platos = paginator.page(page)
@@ -99,7 +105,16 @@ def eliminarPlato(request, id):
     return redirect(to='listar_platos')
 
 def cart(request):
-    data = {}
+    
+    if request.user.is_authenticated:
+        cliente = request.user.cliente
+        pedido, created = Pedido.objects.get_or_create(cliente=cliente, estado_pedido=False)
+        platos = pedido.pedidoitem_set.all()
+    else:
+        platos = []
+    data = {
+        'platos': platos
+    }
     return render(request, 'core/cart.html', data)
 
 def checkout(request):

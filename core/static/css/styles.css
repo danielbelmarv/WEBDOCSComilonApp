@@ -24,7 +24,7 @@
     color:#c0d96f;
 }
 
-body{
+html, body{
     min-height: 100vh;
     background-color: rgb(255, 255, 255);
 }
@@ -77,7 +77,6 @@ h3{
 }
 
 .pie-pagina .grupo-1 .box p{
- 
     margin-bottom: 10px;
 	justify-content: center;
 	text-align: center;
